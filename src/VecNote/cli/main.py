@@ -1,11 +1,11 @@
 from pydantic_settings import BaseSettings, CliApp, SettingsConfigDict, CliSubCommand
-from VecNote.cli.note import NoteCreate
+from VecNote.cli.note import NoteCommands
 
 class VecNote(BaseSettings):
     """
     VecNote basic settings
     """
-    note: CliSubCommand[NoteCreate]
+    note: CliSubCommand[NoteCommands]
 
     model_config = SettingsConfigDict(
         cli_prog_name="VectNote",

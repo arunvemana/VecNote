@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from pathlib import Path
 from datetime import datetime
-
 from typing import Self
 
 
@@ -25,3 +24,19 @@ class Note(BaseModel):
         note_path = dir_path.joinpath(f"{now}.md")
         note_path.touch(exist_ok=True)
         return cls(path=note_path)
+
+    @classmethod
+    def from_path(cls, path: Path) -> Self:
+        """
+        Load the nate from the path
+        """
+        note = cls(path=path)
+        note.load()
+        return note
+
+    def load(self) -> None:
+        """
+        loads the note contains
+        """
+        text = self.path.read_text()
+        self.content = text
